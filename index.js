@@ -5,6 +5,9 @@ const schedulesRoutes = require('./routes/schedules');
 const probRoutes = require('./routes/probfilials');
 const bodyParser = require('body-parser');
 const invoicesRouter = require('./routes/invoices');
+const dnevnikRouter = require('./routes/dnevnik');
+
+
 const app = express();
 const port = 3001;
 const invoiceRoutes = require('./routes/invoiceRoutes'); // Импортируем новые маршруты
@@ -17,6 +20,7 @@ app.use('/api/filials', filialsRoutes);
 app.use('/api/schedules', schedulesRoutes);
 app.use('/api/probfilials', probRoutes);
 app.use('/api', invoicesRouter);
+app.use('/api', dnevnikRouter);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
