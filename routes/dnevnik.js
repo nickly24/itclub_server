@@ -2,16 +2,17 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 
-// Маршрут для получения посещаемости за конкретный месяц
 router.get('/dnevnik/:year/:month', (req, res) => {
   const { year, month } = req.params;
   const startDate = `${year}-${month}-01`;
   const endDate = `${year}-${month}-31`;
 
   const sql = `
-    SELECT a.id, f.name AS filial_name, a.date, a.number_of_children, a.price_per_session
+    SELECT a.id, f.name AS filial_name, a.date, a.number_of_children, a.price_per_session,
+           p.Name AS prepod_name, p.color, p.reg_string
     FROM dnevnik a
     JOIN filials f ON a.filial_id = f.id
+    JOIN prepods p ON a.filial_id = p.filial_id
     WHERE a.date BETWEEN ? AND ?
     ORDER BY f.name, a.date;
   `;
@@ -25,6 +26,7 @@ router.get('/dnevnik/:year/:month', (req, res) => {
     res.json(results);
   });
 });
+
 
 // Маршрут для добавления записи о посещаемости
 router.post('/dnevnik', (req, res) => {
