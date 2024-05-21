@@ -8,13 +8,13 @@ router.get('/dnevnik/:year/:month', (req, res) => {
   const endDate = `${year}-${month}-31`;
 
   const sql = `
-    SELECT a.id, f.name AS filial_name, a.date, a.number_of_children, a.price_per_session,
-           p.Name AS prepod_name, p.color, p.reg_string
-    FROM dnevnik a
-    JOIN filials f ON a.filial_id = f.id
-    JOIN prepods p ON a.filial_id = p.filial_id
-    WHERE a.date BETWEEN ? AND ?
-    ORDER BY f.name, a.date;
+      SELECT a.id, f.name AS filial_name, a.date, a.number_of_children, a.price_per_session,
+      p.Name AS prepod_name, p.color, p.reg_string
+      FROM dnevnik a
+      JOIN filials f ON a.filial_id = f.id
+      JOIN prepods p ON a.prepod_id = p.id
+      WHERE a.date BETWEEN ? AND ?
+      ORDER BY f.name, a.date;
   `;
 
   db.query(sql, [startDate, endDate], (err, results) => {
