@@ -30,10 +30,10 @@ router.get('/dnevnik/:year/:month', (req, res) => {
 
 // Маршрут для добавления записи о посещаемости
 router.post('/dnevnik', (req, res) => {
-  const { filial_id, date, number_of_children, price_per_session } = req.body;
-  const sql = 'INSERT INTO dnevnik (filial_id, date, number_of_children, price_per_session) VALUES (?, ?, ?, ?)';
+  const { filial_id, date, number_of_children, price_per_session, prepod_id } = req.body;
+  const sql = 'INSERT INTO dnevnik (filial_id, date, number_of_children, price_per_session, prepod_id) VALUES (?, ?, ?, ?, ?)';
   
-  db.query(sql, [filial_id, date, number_of_children, price_per_session], (err, result) => {
+  db.query(sql, [filial_id, date, number_of_children, price_per_session, prepod_id], (err, result) => {
     if (err) {
       console.error('Error adding dnevnik:', err);
       res.status(500).send('Server error');
@@ -42,6 +42,7 @@ router.post('/dnevnik', (req, res) => {
     res.json({ id: result.insertId, ...req.body });
   });
 });
+
 
 // Маршрут для обновления записи о посещаемости
 router.put('/dnevnik/:id', (req, res) => {
