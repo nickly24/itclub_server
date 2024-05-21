@@ -44,6 +44,21 @@ router.post('/dnevnik', (req, res) => {
 });
 
 
+// Маршрут для получения списка преподавателей
+router.get('/prepods', (req, res) => {
+  const sql = 'SELECT id, name FROM prepods';
+  
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching prepods:', err);
+      res.status(500).send('Server error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
+
 // Маршрут для обновления записи о посещаемости
 router.put('/dnevnik/:id', (req, res) => {
   const { id } = req.params;
