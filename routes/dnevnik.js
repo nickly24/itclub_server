@@ -31,6 +31,10 @@ router.get('/dnevnik/:year/:month', (req, res) => {
 // Маршрут для добавления записи о посещаемости
 router.post('/dnevnik', (req, res) => {
   const { filial_id, date, number_of_children, price_per_session, prepod_id } = req.body;
+  if (!prepod_id) {
+    res.status(400).send('prepod_id is required');
+    return;
+  }
   const sql = 'INSERT INTO dnevnik (filial_id, date, number_of_children, price_per_session, prepod_id) VALUES (?, ?, ?, ?, ?)';
   
   db.query(sql, [filial_id, date, number_of_children, price_per_session, prepod_id], (err, result) => {
@@ -42,6 +46,7 @@ router.post('/dnevnik', (req, res) => {
     res.json({ id: result.insertId, ...req.body });
   });
 });
+
 
 
 // Маршрут для получения списка преподавателей
@@ -62,10 +67,10 @@ router.get('/prepods', (req, res) => {
 // Маршрут для обновления записи о посещаемости
 router.put('/dnevnik/:id', (req, res) => {
   const { id } = req.params;
-  const { filial_id, date, number_of_children, price_per_session } = req.body;
-  const sql = 'UPDATE dnevnik SET filial_id = ?, date = ?, number_of_children = ?, price_per_session = ? WHERE id = ?';
+  const { filial_id, date, number_of_children, price_per_session,prepod_id } = req.body;
+  const sql = 'UPDATE dnevnik SET filial_id = ?, date = ?, number_of_children = ?, price_per_session = ?, prepod_id = ? WHERE id = ?';
 
-  db.query(sql, [filial_id, date, number_of_children, price_per_session, id], (err, result) => {
+  db.query(sql, [filial_id, date, number_of_children, price_per_session, prepod_id, id], (err, result) => {
     if (err) {
       console.error('Error updating dnevnik:', err);
       res.status(500).send('Server error');
@@ -78,6 +83,9 @@ router.put('/dnevnik/:id', (req, res) => {
     res.sendStatus(200); // OK
   });
 });
+
+
+
 
 // Маршрут для удаления записи о посещаемости
 router.delete('/dnevnik/:id', (req, res) => {
