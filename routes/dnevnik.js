@@ -1,11 +1,43 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
+const { format, lastDayOfMonth } = require('date-fns');
+
+
+router.get('/analytics/:year/:month/:filialId', (req, res) => {
+  const { year, month, filialId } = req.params;
+  const startDate = `${year}-${month}-01`;
+  const endDate = format(lastDayOfMonth(new Date(year, month - 1)), 'yyyy-MM-dd');
+
+  const sql = `
+      SELECT a.id, f.name AS filial_name, a.date, a.number_of_children, a.price_per_session,
+      p.Name AS prepod_name, p.color, p.reg_string
+      FROM dnevnik a
+      JOIN filials f ON a.filial_id = f.id
+      JOIN prepods p ON a.prepod_id = p.id
+      WHERE a.date BETWEEN ? AND ? AND a.filial_id = ?
+      ORDER BY f.name, a.date;
+  `;
+
+  console.log(`Executing SQL for ${year}-${month} and filialId ${filialId}: ${sql} with params [${startDate}, ${endDate}, ${filialId}]`);
+
+  db.query(sql, [startDate, endDate, filialId], (err, results) => {
+    if (err) {
+      console.error('Error fetching attendance:', err);
+      res.status(500).send('Server error');
+      return;
+    }
+    console.log(`Results for ${year}-${month} and filialId ${filialId}:`, results);
+    res.json(results);
+  });
+});
+
+
 
 router.get('/dnevnik/:year/:month', (req, res) => {
   const { year, month } = req.params;
   const startDate = `${year}-${month}-01`;
-  const endDate = `${year}-${month}-31`;
+  const endDate = format(lastDayOfMonth(new Date(year, month - 1)), 'yyyy-MM-dd');
 
   const sql = `
       SELECT a.id, f.name AS filial_name, a.date, a.number_of_children, a.price_per_session,
@@ -17,12 +49,15 @@ router.get('/dnevnik/:year/:month', (req, res) => {
       ORDER BY f.name, a.date;
   `;
 
+  console.log(`Executing SQL for ${year}-${month}: ${sql} with params [${startDate}, ${endDate}]`);
+
   db.query(sql, [startDate, endDate], (err, results) => {
     if (err) {
       console.error('Error fetching attendance:', err);
       res.status(500).send('Server error');
       return;
     }
+    console.log(`Results for ${year}-${month}:`, results);
     res.json(results);
   });
 });
