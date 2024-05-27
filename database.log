@@ -1,0 +1,8 @@
+2024-05-27T06:24:48.981Z - Connected to the database
+2024-05-27T06:26:30.780Z - Connected to the database
+2024-05-27T06:26:34.099Z - Connected to the database
+2024-05-27T06:29:13.608Z - Connected to the database
+2024-05-27T06:30:02.413Z - Connected to the database
+2024-05-27T06:31:31.259Z - Connected to the database
+2024-05-27T06:31:36.909Z - Executing query: SELECT * FROM filials
+2024-05-27T06:32:27.467Z - Executing query: SELECT id, name FROM prepods
