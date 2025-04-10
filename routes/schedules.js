@@ -5,7 +5,7 @@ const db = require('../db/connection');
 // Маршрут для получения всех расписаний
 router.get('/', (req, res) => {
   const sql = `
-    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id,
+    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id, schedules.prepod,
            filials.name, filials.address, filials.metro, filials.metro_color, filials.price, filials.tel, filials.comment
     FROM schedules
     JOIN filials ON schedules.filial_id = filials.id

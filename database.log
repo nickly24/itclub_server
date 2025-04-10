@@ -6,3 +6,49 @@
 2024-05-27T06:31:31.259Z - Connected to the database
 2024-05-27T06:31:36.909Z - Executing query: SELECT * FROM filials
 2024-05-27T06:32:27.467Z - Executing query: SELECT id, name FROM prepods
+2025-04-10T09:38:38.232Z - Connected to the database
+2025-04-10T09:39:00.104Z - Executing query: SELECT * FROM filials
+2025-04-10T09:41:12.586Z - Connected to the database
+2025-04-10T09:41:18.420Z - Executing query: SELECT * FROM filials
+2025-04-10T09:42:30.858Z - Connected to the database
+2025-04-10T09:42:57.524Z - Connected to the database
+2025-04-10T09:43:14.901Z - Executing query: 
+    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id, shedules.prepod,
+           filials.name, filials.address, filials.metro, filials.metro_color, filials.price, filials.tel, filials.comment
+    FROM schedules
+    JOIN filials ON schedules.filial_id = filials.id
+  
+2025-04-10T09:45:14.269Z - Connected to the database
+2025-04-10T09:45:50.022Z - Connected to the database
+2025-04-10T09:45:51.573Z - Connected to the database
+2025-04-10T09:45:54.925Z - Executing query: 
+    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id, sсhedules.prepod,
+           filials.name, filials.address, filials.metro, filials.metro_color, filials.price, filials.tel, filials.comment
+    FROM schedules
+    JOIN filials ON schedules.filial_id = filials.id
+  
+2025-04-10T09:45:56.138Z - Executing query: 
+    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id, sсhedules.prepod,
+           filials.name, filials.address, filials.metro, filials.metro_color, filials.price, filials.tel, filials.comment
+    FROM schedules
+    JOIN filials ON schedules.filial_id = filials.id
+  
+2025-04-10T09:45:56.606Z - Executing query: 
+    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id, sсhedules.prepod,
+           filials.name, filials.address, filials.metro, filials.metro_color, filials.price, filials.tel, filials.comment
+    FROM schedules
+    JOIN filials ON schedules.filial_id = filials.id
+  
+2025-04-10T09:45:56.834Z - Executing query: 
+    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id, sсhedules.prepod,
+           filials.name, filials.address, filials.metro, filials.metro_color, filials.price, filials.tel, filials.comment
+    FROM schedules
+    JOIN filials ON schedules.filial_id = filials.id
+  
+2025-04-10T09:48:13.198Z - Connected to the database
+2025-04-10T09:48:16.480Z - Executing query: 
+    SELECT schedules.id, schedules.day_of_week, schedules.time, schedules.filial_id, schedules.prepod,
+           filials.name, filials.address, filials.metro, filials.metro_color, filials.price, filials.tel, filials.comment
+    FROM schedules
+    JOIN filials ON schedules.filial_id = filials.id
+  
